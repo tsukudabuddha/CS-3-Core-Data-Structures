@@ -1,11 +1,12 @@
 #!python
+import math
 
 def linear_search(array, item):
     """return the first index of item in array or None if item is not found"""
     # implement linear_search_iterative and linear_search_recursive below, then
     # change this to call your implementation to verify it passes all tests
-    return linear_search_iterative(array, item)
-    # return linear_search_recursive(array, item)
+    # return linear_search_iterative(array, item)
+    return linear_search_recursive(array, item)
 
 
 def linear_search_iterative(array, item):
@@ -18,7 +19,14 @@ def linear_search_iterative(array, item):
 
 def linear_search_recursive(array, item, index=0):
     # TODO: implement linear search recursively here
-    pass
+    if index < len(array):
+        if array[index] == item:
+            return index
+
+        return linear_search_recursive(array, item, (index + 1))
+    else:
+        return None
+    print(index)
     # once implemented, change linear_search to call linear_search_recursive
     # to verify that your recursive implementation passes all tests
 
@@ -31,15 +39,37 @@ def binary_search(array, item):
     # return binary_search_recursive(array, item)
 
 
-def binary_search_iterative(array, item):
+def binary_search_iterative(array, item, left=None, right=None):
     # TODO: implement binary search iteratively here
-    pass
+    if item > array[-1]:
+        return None
+
+    if left is None and right is None:
+        left = 0
+        right = len(array)
+
+    mid = math.floor((left + right / 2))
+    if array[mid] == item:
+        return mid
+    if array[mid] < item:
+        left += 1
+    if array[mid] > item:
+        right -= 1
+
+    if left == right:  # End Search if item has not been found
+        return None
+
+    return binary_search_iterative(array, item, left, right)
+
     # once implemented, change binary_search to call binary_search_iterative
     # to verify that your iterative implementation passes all tests
 
 
 def binary_search_recursive(array, item, left=None, right=None):
     # TODO: implement binary search recursively here
-    pass
+    if item > array[-1]:
+        return None
+
+
     # once implemented, change binary_search to call binary_search_recursive
     # to verify that your recursive implementation passes all tests
