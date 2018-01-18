@@ -18,7 +18,9 @@ class StringsTest(unittest.TestCase):
         assert contains('aaa', 'a') is True  # multiple occurrences
         assert contains('aaa', 'aa') is True  # overlapping pattern
         # TODO: Write more positive test cases with assert is True statements
-        # ...
+        assert contains('andrewbandrew', 'and') is True
+        assert contains('booooooo', 'boo') is True
+        assert contains('booooooo', 'oooo') is True
 
     def test_contains_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns
