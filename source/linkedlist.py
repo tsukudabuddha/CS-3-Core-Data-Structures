@@ -23,6 +23,7 @@ class LinkedList(object):
         if iterable is not None:
             for item in iterable:
                 self.append(item)
+                self.size += 1
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -78,7 +79,14 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index < self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node at the given index and return its data
+        # Find the node at the given index and return its data
+
+        # Start at the head node
+        node = self.head
+        # Loop until the node is None, which is one node too far past the tail
+        for i in range(0, index):
+            node = node.next  # Skip through nodes until at given index
+        return node.data
 
     def insert_at_index(self, index, item):
         """Insert the given item at the given index in this linked list, or
@@ -143,9 +151,19 @@ class LinkedList(object):
         using the same node, or raise ValueError if old_item is not found.
         Best case running time: ??? under what conditions? [TODO]
         Worst case running time: ??? under what conditions? [TODO]"""
-        # TODO: Find the node containing the given old_item and replace its
+        # Find the node containing the given old_item and replace its
         # data with new_item, without creating a new node object
-        pass
+        node = self.head
+        found = False
+
+        while node is not None:
+            if node.data == old_item:
+                node.data = new_item
+                found = True
+            node = node.next
+
+        if not found:
+            ValueError('Item not found: {}'.format(item))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -175,6 +193,8 @@ class LinkedList(object):
                 previous.next = node.next
                 # Unlink the found node from its next node
                 node.next = None
+                # Remove one from size counter
+                self.size -= 1
             # Check if we found a node at the head
             if node is self.head:
                 # Update head to the next node

@@ -21,6 +21,8 @@ class StringsTest(unittest.TestCase):
         assert contains('andrewbandrew', 'and') is True
         assert contains('booooooo', 'boo') is True
         assert contains('booooooo', 'oooo') is True
+        assert contains('aaaaab', 'aaab') is True  # overlapping prefix
+        assert find_index('aaaaab', 'aaab') == 2  # overlapping prefix
 
     def test_contains_with_non_matching_patterns(self):
         # Negative test cases (counterexamples) with non-matching patterns
