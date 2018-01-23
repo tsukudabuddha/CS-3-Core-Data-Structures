@@ -56,7 +56,7 @@ class LinkedStack(object):
         if self.list.is_empty():
             raise ValueError("Stack is empty")
 
-        # Store data to return
+        # Store data of top item to return later
         top_item_data = self.list.head.data
 
         # Remove top item from stack
