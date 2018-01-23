@@ -23,7 +23,6 @@ class LinkedList(object):
         if iterable is not None:
             for item in iterable:
                 self.append(item)
-                self.size += 1
 
     def __str__(self):
         """Return a formatted string representation of this linked list."""
@@ -81,6 +80,10 @@ class LinkedList(object):
             raise ValueError('List index out of range: {}'.format(index))
         # Find the node at the given index and return its data
 
+        # Check if empty
+        if self.is_empty():
+            return None
+
         # Start at the head node
         node = self.head
         # Loop until the node is None, which is one node too far past the tail
@@ -96,7 +99,26 @@ class LinkedList(object):
         # Check if the given index is out of range and if so raise an error
         if not (0 <= index <= self.size):
             raise ValueError('List index out of range: {}'.format(index))
-        # TODO: Find the node before the given index and insert item after it
+        # Find the node before the given index and insert item after it
+
+        # Check if first or last
+        if index == 0:
+            self.prepend(item)
+        elif index == self.size:
+            self.append(item)
+        else:
+            # Start at the head node
+            node = self.head
+
+            # Loop until the node is None, which is one node too far past the tail
+            for i in range(0, index - 1):
+                node = node.next  # Skip through nodes until at index before item
+
+            temp_node = node.next
+            node.next = Node(item)
+            node.next.next = temp_node
+            self.size += 1
+
 
     def append(self, item):
         """Insert the given item at the tail of this linked list.
@@ -113,6 +135,9 @@ class LinkedList(object):
         # Update tail to new node regardless
         self.tail = new_node
 
+        # Increment size
+        self.size += 1
+
     def prepend(self, item):
         """Insert the given item at the head of this linked list.
         Best and worst case running time: ??? under what conditions? [TODO]"""
@@ -127,6 +152,9 @@ class LinkedList(object):
             new_node.next = self.head
         # Update head to new node regardless
         self.head = new_node
+
+        # Increment size
+        self.size += 1
 
     def find(self, quality):
         """Return an item from this linked list satisfying the given quality.
@@ -163,7 +191,7 @@ class LinkedList(object):
             node = node.next
 
         if not found:
-            ValueError('Item not found: {}'.format(item))
+            raise ValueError('Item not found: {}'.format(old_item))
 
     def delete(self, item):
         """Delete the given item from this linked list, or raise ValueError.
@@ -187,14 +215,16 @@ class LinkedList(object):
                 node = node.next
         # Check if we found the given item or we never did and reached the tail
         if found:
+            # Remove one from size counter
+            self.size -= 1
+
             # Check if we found a node in the middle of this linked list
             if node is not self.head and node is not self.tail:
                 # Update the previous node to skip around the found node
                 previous.next = node.next
                 # Unlink the found node from its next node
                 node.next = None
-                # Remove one from size counter
-                self.size -= 1
+
             # Check if we found a node at the head
             if node is self.head:
                 # Update head to the next node
@@ -229,6 +259,14 @@ def test_linked_list():
     print('tail: {}'.format(ll.tail))
     print('size: {}'.format(ll.size))
     print('length: {}'.format(ll.length()))
+
+    print('Initialize:')
+    lll = LinkedList(['A', 'B', 'C', 'D'])
+    print(lll)
+    print('head: {}'.format(lll.head))
+    print('tail: {}'.format(lll.tail))
+    print('size: {}'.format(lll.size))
+    print('length: {}'.format(lll.length()))
 
     print('Getting items by index:')
     for index in range(ll.size):
