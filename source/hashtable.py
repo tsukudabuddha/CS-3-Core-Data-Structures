@@ -26,7 +26,7 @@ class HashTable(object):
     def load_factor(self):
         """Return the load factor, the ratio of number of entries to buckets.
         Best and worst case running time: ??? under what conditions? [TODO]"""
-        # Calculate load factor 
+        # Calculate load factor
         return self.size / len(self.buckets)
 
     def keys(self):
@@ -105,18 +105,24 @@ class HashTable(object):
         index = self._bucket_index(key)
         bucket = self.buckets[index]
         # Find the entry with the given key in that bucket, if one exists
+
         # Check if an entry with the given key exists in that bucket
         entry = bucket.find(lambda key_value: key_value[0] == key)
+
         if entry is not None:  # Found
             # In this case, the given key's value is being updated
             # Remove the old key-value entry from the bucket first
             bucket.delete(entry)
+        else:
+            # Increment Size if new entry
+            self.size += 1
         # Insert the new key-value entry into the bucket in either case
         bucket.append((key, value))
-        # TODO: Check if the load factor exceeds a threshold such as 0.75
-        # ...
-        # TODO: If so, automatically resize to reduce the load factor
-        # ...
+
+        # Check if the load factor exceeds a threshold such as 0.75
+        if self.load_factor() > 0.75:
+            # If so, automatically resize to reduce the load factor
+            self._resize()
 
     def delete(self, key):
         """Delete the given key and its associated value, or raise KeyError.
@@ -130,6 +136,9 @@ class HashTable(object):
         if entry is not None:  # Found
             # Remove the key-value entry from the bucket
             bucket.delete(entry)
+
+            # Decrement size ONLY if item is deleted
+            self.size -= 1
         else:  # Not found
             raise KeyError('Key not found: {}'.format(key))
 
@@ -145,13 +154,16 @@ class HashTable(object):
         # Option to reduce size if buckets are sparsely filled (low load factor)
         elif new_size is 0:
             new_size = len(self.buckets) / 2  # Half size
-        # TODO: Get a list to temporarily hold all current key-value entries
-        # ...
-        # TODO: Create a new list of new_size total empty linked list buckets
-        # ...
-        # TODO: Insert each key-value entry into the new list of buckets,
+        # Get a list to temporarily hold all current key-value entries
+        kv_pairs = self.items()
+
+        # Create a new list of new_size total empty linked list buckets
+        self.__init__(new_size)
+
+        # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        # ...
+        for kv in kv_pairs:
+            self.set(kv[0], kv[1])
 
 
 def test_hash_table():
