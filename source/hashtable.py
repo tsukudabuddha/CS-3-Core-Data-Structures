@@ -162,8 +162,8 @@ class HashTable(object):
 
         # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
-        for kv in kv_pairs:
-            self.set(kv[0], kv[1])
+        for k, v in kv_pairs:
+            self.set(k, v)
 
 
 def test_hash_table():
