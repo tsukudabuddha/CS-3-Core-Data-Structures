@@ -158,7 +158,7 @@ class HashTable(object):
         kv_pairs = self.items()
 
         # Create a new list of new_size total empty linked list buckets
-        self.__init__(new_size)
+        self.__init__(new_size)  # Also resets size to 0
 
         # Insert each key-value entry into the new list of buckets,
         # which will rehash them into a new bucket index based on the new size
