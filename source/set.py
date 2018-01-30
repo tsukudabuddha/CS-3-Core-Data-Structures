@@ -1,7 +1,7 @@
 #!python
 from linkedlist import LinkedList
 from hashtable import HashTable
-
+from copy import deepcopy
 
 class Set(object):
     """Set Data Structure w/."""
@@ -17,7 +17,7 @@ class Set(object):
 
     def add(self, element):
         """Add new element to set, if unique."""
-        self.ht.set(element, True)  # TODO: Try using None
+        self.ht.set(element, None)
         self.size = self.ht.size
 
     def remove(self, element):
@@ -27,14 +27,49 @@ class Set(object):
 
     def union(self, other_set):
         """Return a new set that is the union of self and other_set."""
-        all_items = self.ht.items()
-        all_items.append(other_set.items())
+        union_set = deepcopy(self)
 
-        if len(self.ht.buckets) > len(other_set.buckets):
-            new_table = self.__init__(len(self.ht.buckets))
+        for item in other_set.ht.items():
+            union_set.add(item)
+        return union_set
+
+    def intersection(self, other_set):
+        """Return a new set that is the intersection of self and other_set."""
+        intersection_set = Set()
+        my_items = self.ht.items()
+        other_items = self.ht.items()
+        if len(my_items) < len(other_items):
+            for item in my_items:
+                if my_items.contains(item):
+                    intersection_set.add(item)
         else:
-            new_table = self.__init__(len(other_set.buckets))
+            for item in other_items:
+                if other_items.contains(item):
+                    intersection_set.add(item)
 
-        for item in all_items:
-            new_table.add(item)
-        return new_table
+        return intersection_set
+
+    def difference(self, other_set):
+        """Return a new set that is the difference of self and other_set."""
+        difference_set = Set()
+
+        for item in self.ht.items():
+            if not other_set.contains(item):
+                difference_set.add(item)
+        return difference_set
+
+    def is_subset(self, other_set):
+        """Return a boolean indicating whether other_set is a subset of this set."""
+        for item in other_set.ht.items():
+            if not self.contains(item):
+                return False
+        return True
+
+
+if __name__ == "__main__":
+    s1 = Set()
+    s2 = Set()
+    s2.add("Andrew")
+    s1.add("Apple")
+    s3 = s1.union(s2)
+    print(s3.ht.items())
