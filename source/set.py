@@ -1,5 +1,4 @@
 #!python
-from linkedlist import LinkedList
 from hashtable import HashTable
 from copy import deepcopy
 
