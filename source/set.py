@@ -37,15 +37,14 @@ class Set(object):
     def intersection(self, other_set):
         """Return a new set that is the intersection of self and other_set."""
         intersection_set = Set()
-        my_items = self.ht.items()
-        other_items = self.ht.items()
-        if len(my_items) < len(other_items):
-            for item in my_items:
-                if my_items.contains(item):
+
+        if self.size < other_set.size:
+            for item in self.ht.items():
+                if other_set.contains(item):
                     intersection_set.add(item)
         else:
-            for item in other_items:
-                if other_items.contains(item):
+            for item in other_set.items():
+                if self.contains(item):
                     intersection_set.add(item)
 
         return intersection_set
