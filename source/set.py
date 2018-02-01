@@ -38,11 +38,12 @@ class Set(object):
         """Return a new set that is the intersection of self and other_set."""
         intersection_set = Set()
 
+        # Use smaller set in order to iterate less items and improve runtime
         if self.size < other_set.size:
             for item in self.ht.items():
                 if other_set.contains(item):
                     intersection_set.add(item)
-        else:
+        else:  # If other set is smaller than self
             for item in other_set.items():
                 if self.contains(item):
                     intersection_set.add(item)
