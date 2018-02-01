@@ -1,6 +1,6 @@
 #!python
 
-from binarysearchtree import BinarySearchTree, BinaryTreeNode
+from binarytree import BinaryTreeNode # BinarySearchTree
 import unittest
 
 
@@ -46,6 +46,15 @@ class BinaryTreeNodeTest(unittest.TestCase):
         # Detach right child node
         node.right = None
         assert node.is_branch() is False
+
+    def test_height(self):
+        # Create node with no children
+        node = BinaryTreeNode(2)
+        assert node.height() == 0
+
+        # Add child
+        node.left = BinaryTreeNode(1)
+        assert node.height() == 1
 
 
 class BinarySearchTreeTest(unittest.TestCase):
