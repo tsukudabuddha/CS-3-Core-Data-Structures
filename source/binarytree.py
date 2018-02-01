@@ -89,8 +89,8 @@ class BinarySearchTree(object):
         TODO: Worst case running time: ??? under what conditions?"""
         # Find a node with the given item, if any
         node = self._find_node(item)
-        # TODO: Return the node's data if found, or None
-        return node.data if ... else None
+        # Return the node's data if found, or None
+        return node.data if node is not None else None
 
     def insert(self, item):
         """Insert the given item in order into this binary search tree.
