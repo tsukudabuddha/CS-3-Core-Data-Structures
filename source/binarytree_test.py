@@ -56,6 +56,10 @@ class BinaryTreeNodeTest(unittest.TestCase):
         node.left = BinaryTreeNode(1)
         assert node.height() == 1
 
+        # Add grandchild on left side
+        node.left.right = BinaryTreeNode(4)
+        assert node.height() == 2
+
 
 class BinarySearchTreeTest(unittest.TestCase):
 
