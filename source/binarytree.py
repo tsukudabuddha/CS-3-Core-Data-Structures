@@ -98,14 +98,14 @@ class BinarySearchTree(object):
         TODO: Worst case running time: ??? under what conditions?"""
         # Handle the case where the tree is empty
         if self.is_empty():
-            # TODO: Create a new root node
-            self.root = ...
-            # TODO: Increase the tree size
-            self.size ...
+            # Create a new root node
+            self.root = BinaryTreeNode()
+            # Increase the tree size
+            self.size += 1
             return
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node(item)
-        # TODO: Check if the given item should be inserted left of parent node
+        # Check if the given item should be inserted left of parent node
         if ...:
             # TODO: Create a new node and set the parent's left child
             parent.left = ...
@@ -151,20 +151,20 @@ class BinarySearchTree(object):
         parent = None
         # Loop until we descend past the closest leaf node
         while node is not None:
-            # TODO: Check if the given item matches the node's data
-            if ...:
+            # Check if the given item matches the node's data
+            if node.data == item:
                 # Return the parent of the found node
                 return parent
-            # TODO: Check if the given item is less than the node's data
-            elif ...:
-                # TODO: Update the parent and descend to the node's left child
+            # Check if the given item is less than the node's data
+        elif item < node.data:
+                # Update the parent and descend to the node's left child
                 parent = node
-                node = ...
-            # TODO: Check if the given item is greater than the node's data
-            elif ...:
-                # TODO: Update the parent and descend to the node's right child
+                node = node.left
+            # Check if the given item is greater than the node's data
+        elif item > node.data:
+                # Update the parent and descend to the node's right child
                 parent = node
-                node = ...
+                node = node.right
         # Not found
         return parent
 
