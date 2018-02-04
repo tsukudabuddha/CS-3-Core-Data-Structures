@@ -134,7 +134,7 @@ class BinarySearchTree(object):
                 # Descend to the node's left child
                 node = node.left
             # Check if the given item is greater than the node's data
-        elif item > node.data:
+            elif item > node.data:
                 # Descend to the node's right child
                 node = node.right
         # Not found
@@ -156,12 +156,12 @@ class BinarySearchTree(object):
                 # Return the parent of the found node
                 return parent
             # Check if the given item is less than the node's data
-        elif item < node.data:
+            elif item < node.data:
                 # Update the parent and descend to the node's left child
                 parent = node
                 node = node.left
             # Check if the given item is greater than the node's data
-        elif item > node.data:
+            elif item > node.data:
                 # Update the parent and descend to the node's right child
                 parent = node
                 node = node.right
