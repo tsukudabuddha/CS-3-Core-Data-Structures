@@ -45,9 +45,18 @@ def insertion_sort(items):
     order in front of items, and repeating until all items are in order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until all items are in sorted order
-    # TODO: Take first unsorted item
-    # TODO: Insert it in sorted order in front of items
+    while not is_sorted(items):
+        # Iterate through all elements in list (start at 1 to compare i - 1)
+        for i in range(1, len(items)):
+
+            # Keep track of unsorted starting index
+            countdown_index = i
+
+            # If item is unsorted then ->
+            # Keep swapping unsorted element on way down to being sorted
+            while countdown_index > 0 and items[countdown_index - 1] > items[i]:
+                items[i], items[countdown_index - 1] = items[countdown_index - 1], items[i]
+                countdown_index -= 1
 
 
 def merge(items1, items2):
@@ -55,7 +64,7 @@ def merge(items1, items2):
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Repeat until one list is empty
+    # Repeat until one list is empty
     # TODO: Find minimum item in both lists and append it to new list
     # TODO: Append remaining items in non-empty list to new list
 
