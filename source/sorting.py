@@ -1,5 +1,5 @@
 #!python
-
+import math
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
@@ -80,9 +80,13 @@ def merge(items1, items2):
             items2.remove(min2)
     # Append remaining items in non-empty list to new list
     if len(items1) == 0:
-        sorted_list.append(items2)
+        for item in items2:
+            sorted_list.append(item)
+
     else:
-        sorted_list.append(items1)
+        for item in items1:
+            sorted_list.append(item)
+
     return sorted_list
 
 
@@ -92,9 +96,17 @@ def split_sort_merge(items):
     a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half using any other sorting algorithm
-    # TODO: Merge sorted halves into one list in sorted order
+    # Split items list into approximately equal halves
+    halfway_point = math.floor((len(items)/2))
+    list_1 = items[:halfway_point]
+    list_2 = items[halfway_point:]
+    # Sort each half using any other sorting algorithm
+    bubble_sort(list_1)
+    print(list_1)
+    bubble_sort(list_2)
+    print(list_2)
+    # Merge sorted halves into one list in sorted order
+    items = merge(items1=list_1, items2=list_2)
 
 
 def merge_sort(items):
@@ -102,10 +114,14 @@ def merge_sort(items):
     sorting each recursively, and merging results into a list in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
-    # TODO: Check if list is so small it's already sorted (base case)
-    # TODO: Split items list into approximately equal halves
-    # TODO: Sort each half by recursively calling merge sort
-    # TODO: Merge sorted halves into one list in sorted order
+    # Check if list is so small it's already sorted (base case)
+    if not is_sorted(items):
+        # Split items list into approximately equal halves
+        halfway_point = math.floor(len(items) - 1)
+        list_1 = items[:halfway_point]
+        list_2 = items[halfway_point:]
+        # TODO: Sort each half by recursively calling merge sort
+        # TODO: Merge sorted halves into one list in sorted order
 
 
 def random_ints(count=20, min=1, max=50):
