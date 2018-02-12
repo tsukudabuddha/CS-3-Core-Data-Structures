@@ -34,6 +34,7 @@ def selection_sort(items):
     while not is_sorted(items):
         # Find minimum item in unsorted items
         minimum = min(items)
+
         # Swap it with first unsorted item
         for i in range(0, len(items) - 1):
             if items[i] > items[i + 1]:
@@ -59,14 +60,30 @@ def insertion_sort(items):
                 countdown_index -= 1
 
 
+
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
+    sorted_list = []
     # Repeat until one list is empty
-    # TODO: Find minimum item in both lists and append it to new list
-    # TODO: Append remaining items in non-empty list to new list
+    while len(items1) != 0 and len(items2) != 0:
+        # Find minimum item in both lists and append it to new list
+        min1 = min(items1)
+        min2 = min(items2)
+        if min1 < min2:
+            sorted_list.append(min1)
+            items1.remove(min1)
+        else:
+            sorted_list.append(min2)
+            items2.remove(min2)
+    # Append remaining items in non-empty list to new list
+    if len(items1) == 0:
+        sorted_list.append(items2)
+    else:
+        sorted_list.append(items1)
+    return sorted_list
 
 
 def split_sort_merge(items):
