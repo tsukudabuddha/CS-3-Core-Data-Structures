@@ -119,6 +119,7 @@ def merge_sort(items):
         list_1 = items[:halfway_point]
         list_2 = items[halfway_point:]
         # Sort each half by recursively calling merge sort
+        merge_sort(list_1)
         merge_sort(list_2)
         # Merge sorted halves into one list in sorted order
         items[:] = merge(list_1, list_2)
