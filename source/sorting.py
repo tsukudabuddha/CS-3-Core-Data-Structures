@@ -1,5 +1,4 @@
 #!python
-import math
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
@@ -23,6 +22,7 @@ def bubble_sort(items):
         for i in range(0, len(items) - 1):
             if items[i] > items[i + 1]:
                 items[i], items[i + 1] = items[i + 1], items[i]
+    return items
 
 
 def selection_sort(items):
@@ -70,8 +70,8 @@ def merge(items1, items2):
     # Repeat until one list is empty
     while len(items1) != 0 and len(items2) != 0:
         # Find minimum item in both lists and append it to new list
-        min1 = min(items1)
-        min2 = min(items2)
+        min1 = items1[0]  # Since both lists are sorted we can assume 0 index is min
+        min2 = items2[0]
         if min1 < min2:
             sorted_list.append(min1)
             items1.remove(min1)
@@ -97,16 +97,14 @@ def split_sort_merge(items):
     TODO: Running time: ??? Why and under what conditions?
     TODO: Memory usage: ??? Why and under what conditions?"""
     # Split items list into approximately equal halves
-    halfway_point = math.floor((len(items)/2))
+    halfway_point = len(items) // 2
     list_1 = items[:halfway_point]
     list_2 = items[halfway_point:]
     # Sort each half using any other sorting algorithm
     bubble_sort(list_1)
-    print(list_1)
     bubble_sort(list_2)
-    print(list_2)
     # Merge sorted halves into one list in sorted order
-    items = merge(items1=list_1, items2=list_2)
+    items[:] = merge(items1=list_1, items2=list_2)
 
 
 def merge_sort(items):
@@ -117,11 +115,13 @@ def merge_sort(items):
     # Check if list is so small it's already sorted (base case)
     if not is_sorted(items):
         # Split items list into approximately equal halves
-        halfway_point = math.floor(len(items) - 1)
+        halfway_point = len(items) // 2
         list_1 = items[:halfway_point]
         list_2 = items[halfway_point:]
-        # TODO: Sort each half by recursively calling merge sort
-        # TODO: Merge sorted halves into one list in sorted order
+        # Sort each half by recursively calling merge sort
+        merge_sort(list_2)
+        # Merge sorted halves into one list in sorted order
+        items[:] = merge(list_1, list_2)
 
 
 def random_ints(count=20, min=1, max=50):

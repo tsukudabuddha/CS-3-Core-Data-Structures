@@ -1,12 +1,12 @@
 #!python
 
 from sorting import (is_sorted, bubble_sort, selection_sort, insertion_sort,
-                     merge_sort, random_ints)
+                     merge_sort, random_ints, split_sort_merge)
 import unittest
 
 
 # Change this variable to the sort function you want to test
-sort = bubble_sort
+sort = split_sort_merge
 
 
 class IsSortedTest(unittest.TestCase):
