@@ -1,4 +1,5 @@
 #!python
+from binarytree import BinarySearchTree
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
@@ -124,6 +125,30 @@ def merge_sort(items):
         # Merge sorted halves into one list in sorted order
         items[:] = merge(list_1, list_2)
 
+
+def tree_sort(items):
+    tree = BinarySearchTree(items=items)
+    items[:] = tree.items_in_order()
+
+
+def quick_sort(items):
+    # Choose pivot if available
+    if len(items) <= 1:
+        return
+
+    pivot = items[0]
+    left = []
+    right = []
+
+    for i in range(1, len(items)):
+        if items[i] < pivot:
+            left.append(items[i])
+        else:
+            right.append(items[i])
+
+    quick_sort(left)
+    quick_sort(right)
+    items[:] = left + [pivot] + right
 
 def random_ints(count=20, min=1, max=50):
     """Return a list of `count` integers sampled uniformly at random from

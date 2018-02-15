@@ -99,22 +99,24 @@ class BinarySearchTree(object):
         # Handle the case where the tree is empty
         if self.is_empty():
             # Create a new root node
-            self.root = BinaryTreeNode()
+            self.root = BinaryTreeNode(item)
             # Increase the tree size
             self.size += 1
             return
+
         # Find the parent node of where the given item should be inserted
         parent = self._find_parent_node(item)
         # Check if the given item should be inserted left of parent node
-        if item < parent.data:
-            # Create a new node and set the parent's left child
-            parent.left = BinaryTreeNode(item)
-        # Check if the given item should be inserted right of parent node
-        elif item > parent.data:
-            # Create a new node and set the parent's right child
-            parent.right = BinaryTreeNode(item)
-        # Increase the tree size
-        self.size += 1
+        if parent:
+            if item < parent.data:
+                # Create a new node and set the parent's left child
+                parent.left = BinaryTreeNode(item)
+            # Check if the given item should be inserted right of parent node
+            elif item > parent.data:
+                # Create a new node and set the parent's right child
+                parent.right = BinaryTreeNode(item)
+            # Increase the tree size
+            self.size += 1
 
     def _find_node(self, item):
         """Return the node containing the given item in this binary search tree,
@@ -188,7 +190,7 @@ class BinarySearchTree(object):
         if node.left is not None:
             self._traverse_in_order_recursive(node.left, visit)
         # Visit this node's data with given function
-        visit(node)
+        visit(node.data)
         # Traverse right subtree, if it exists
         if node.right is not None:
             self._traverse_in_order_recursive(node.right, visit)
