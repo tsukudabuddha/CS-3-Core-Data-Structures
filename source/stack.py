@@ -31,7 +31,7 @@ class LinkedStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) - prepending ll is one operation"""
         # Push given item
         self.list.prepend(item)
 
@@ -49,7 +49,7 @@ class LinkedStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) - removing head of ll is one operation"""
         # Remove and return top item, if any
 
         # Check if empty
@@ -95,7 +95,7 @@ class ArrayStack(object):
 
     def push(self, item):
         """Insert the given item on the top of this stack.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) majority, O(n) worst case"""
         # Insert given item
         self.list.append(item)
 
@@ -113,7 +113,7 @@ class ArrayStack(object):
     def pop(self):
         """Remove and return the item on the top of this stack,
         or raise ValueError if this stack is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) removing item from list is one operation"""
         # Remove and return top item, if any
 
         # Check if empty

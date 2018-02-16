@@ -31,7 +31,7 @@ class LinkedQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) -- appending item to linked list one operation"""
         # Insert given item
         self.list.append(item)
 
@@ -50,7 +50,7 @@ class LinkedQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) removing first item in linked list is two operation"""
         # Remove and return front item, if any
 
         # Raise valueError if queue is empty
@@ -96,7 +96,7 @@ class ArrayQueue(object):
 
     def enqueue(self, item):
         """Insert the given item at the back of this queue.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: 0(1) majority, but O(n) when resizing"""
         # Insert given item
         self.list.append(item)
 
@@ -114,7 +114,7 @@ class ArrayQueue(object):
     def dequeue(self):
         """Remove and return the item at the front of this queue,
         or raise ValueError if this queue is empty.
-        Running time: O(???) – Why? [TODO]"""
+        Running time: O(1) -- removing last item in array is one operation"""
         # Remove and return front item, if any
 
         # Check if queue is empty
