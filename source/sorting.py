@@ -3,8 +3,8 @@ from binarytree import BinarySearchTree
 
 def is_sorted(items):
     """Return a boolean indicating whether given items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n) always -- need to check every element in list once
+    Memory usage: 0 -- doesn't create any new vars"""
     # Check that all adjacent items are in order, return early if not
     for i in range(0, len(items) - 1):
         if items[i] > items[i + 1]:
@@ -15,8 +15,9 @@ def is_sorted(items):
 def bubble_sort(items):
     """Sort given items by swapping adjacent items that are out of order, and
     repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n*n) -- if the list is in reversed order, then each
+        element must be moved n times to get to its position
+    Memory usage: 0 -- doesn't create any new vars"""
     # Repeat until all items are in sorted order
     while not is_sorted(items):
         # Swap adjacent items that are out of order
@@ -29,8 +30,9 @@ def bubble_sort(items):
 def selection_sort(items):
     """Sort given items by finding minimum item, swapping it with first
     unsorted item, and repeating until all items are in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n*n) -- finding minimum value takes O(n) worst case
+        have to find min number for all elements (n)
+    Memory usage: O(1) create one var that is modified"""
     # Repeat until all items are in sorted order
     while not is_sorted(items):
         # Find minimum item in unsorted items
@@ -45,8 +47,9 @@ def selection_sort(items):
 def insertion_sort(items):
     """Sort given items by taking first unsorted item, inserting it in sorted
     order in front of items, and repeating until all items are in order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n*n) -- worst case every item needs to be swapped with
+        eachother
+    Memory usage: O(1) create two var that are modified"""
     while not is_sorted(items):
         # Iterate through all elements in list (start at 1 to compare i - 1)
         for i in range(1, len(items)):
@@ -65,8 +68,9 @@ def insertion_sort(items):
 def merge(items1, items2):
     """Merge given lists of items, each assumed to already be in sorted order,
     and return a new list containing all items in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(n) where n is the combined length on items1 and items2
+        -- Need to iterate over every item in each list once
+    Memory usage: O(1) -- create 4 vars"""
     sorted_list = []
     # Repeat until one list is empty
     while len(items1) != 0 and len(items2) != 0:
@@ -95,24 +99,24 @@ def split_sort_merge(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each with an iterative sorting algorithm, and merging results into
     a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O((n*n/2)+n) -- line by line
+    Memory usage: O(n) -- create two lists half size of ncv"""
     # Split items list into approximately equal halves
     halfway_point = len(items) // 2
     list_1 = items[:halfway_point]
     list_2 = items[halfway_point:]
     # Sort each half using any other sorting algorithm
-    bubble_sort(list_1)
-    bubble_sort(list_2)
+    bubble_sort(list_1)  # (n*n)/4
+    bubble_sort(list_2)  # (n*n)/4
     # Merge sorted halves into one list in sorted order
-    items[:] = merge(items1=list_1, items2=list_2)
+    items[:] = merge(items1=list_1, items2=list_2)  # O(n)
 
 
 def merge_sort(items):
     """Sort given items by splitting list into two approximately equal halves,
     sorting each recursively, and merging results into a list in sorted order.
-    TODO: Running time: ??? Why and under what conditions?
-    TODO: Memory usage: ??? Why and under what conditions?"""
+    Running time: O(log base 2 n)
+    Memory usage: O(n) -- create two lists of length n/2"""
     # Check if list is so small it's already sorted (base case)
     if not is_sorted(items):
         # Split items list into approximately equal halves
@@ -132,7 +136,7 @@ def tree_sort(items):
 
 
 def quick_sort(items):
-    # Choose pivot if available
+
     if len(items) <= 1:
         return
 
